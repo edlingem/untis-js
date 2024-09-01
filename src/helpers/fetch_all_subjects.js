@@ -33,6 +33,10 @@ const fetchAllSubjects = async (serverHostname, loginName, authCookieString) => 
 
     const json = await response.json();
 
+    // Catch errors in response
+    const error = json.error
+    if (error) return { error: json.error }
+
     const subjects = json["result"].map(subjectJSON => {
         const subject = new Subject();
 

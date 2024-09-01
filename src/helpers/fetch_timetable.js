@@ -72,6 +72,10 @@ const fetchTimetable = async (serverHostname, loginName, authCookieString, start
 
     const json = await response.json();
 
+    // Catch errors in response
+    const error = json.error
+    if (error) return { error: json.error }
+
     const entries = json["result"].map(entryJSON => {
         const subject = new Subject();
 
